@@ -9,6 +9,7 @@ def sigmoid_derivative(x):
     return sigmoid(x) * (1 - sigmoid(x))
 
 
+# Define a Network class, containing all the methods for train ing and evaluating the network
 class Network:
     def __init__(self, inputs, desired_outputs, layer1neurons):
         self.inputs = inputs  # inputs as an array, dimensions are Inputs x Training lines
@@ -18,10 +19,12 @@ class Network:
         self.output = np.zeros(self.desired_outputs.shape)  # output used for error calculation
         self.mse_lst = []
 
+    # define feed forward function
     def feedforward(self):
         self.hiddenlayer1 = sigmoid(np.dot(self.inputs, self.weightset1))   # feedforward inputs to first layer
         self.output = sigmoid(np.dot(self.hiddenlayer1, self.weightset2))   # feedforward first layer to output
 
+    # define the back propagation method and update the weights
     def backpropagate(self, learning_rate):
         # calculating the change of the weights, calculating first and adding later since the calculation
         # for every layer has to be done first
@@ -32,6 +35,7 @@ class Network:
         self.weightset1 += weights1_change
         self.weightset2 += weights2_change
 
+    # define the Mean squared error calculations, to be performed at every epoch and to evaluate the network performance
     def mse(self, results, target_lst):
         output = []
         for i in range(len(results)):
@@ -41,6 +45,6 @@ class Network:
                 else:
                     results[i][j] = (0 - results[i][j]) ** 2
 
-            # record the mean sum of the errors squared
+            # record the mean sum of the errors squared and append it to the self.mse list
             output.append(sum(results[i]) / len(results[i]))
         self.mse_lst.append(sum(output) / len(output))
