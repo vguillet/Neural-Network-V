@@ -44,14 +44,16 @@ features_array_n = normalize(features_array)
 # Variables initialization
 # ---------------------------------------------------
 epoch = 1500                                        # setting training iterations
-learning_rate = 0.1                                 # setting learning rate
-layer1neurons = 4                                   # number of hidden layers neurons
+learning_rate = 0.3                                 # setting learning rate
+layer1neurons = 8                                   # number of hidden layers neurons
+layer2neurons = 8                                   # number of hidden layers neurons
+layer3neurons = 8                                   # number of hidden layers neurons
 
 inputlayer_neurons = features_array_n.shape[1]      # number of features in data set
 # ---------------------------------------------------
 
 # create the network with inputs, and desired outputs
-nn = Network(features_array_n, target_array, layer1neurons)
+nn = Network(features_array_n, target_array, layer1neurons, layer2neurons, layer3neurons)
 
 # iterate epoch numbers of times
 for i in range(epoch):
